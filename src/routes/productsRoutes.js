@@ -46,4 +46,43 @@ router.post('/',async(req,res)=>{
 })
 
 
+
+router.patch('/:id',async(req,res)=>{
+    const {id} = req.params    
+    const body = req.body
+    const data = await fs.promises.readFile('products.json','utf-8')
+    const products = JSON.parse(data)
+    const index =products.findIndex(product => product.id === id)
+    if(index === -1){
+        return res.status(200).json({error:"producto no existente"})
+    }
+
+    products[index] = {...products[index],...body}
+
+    await fs.promises.writeFile('products.json',JSON.stringify(products,null,2))
+    res.json({message:"Producto actualizado exitosamente"})
+})
+
+
+router.delete('/:id',async(req,res)=>{
+    const {id} = req.params    
+    const data = await fs.promises.readFile('products.json','utf-8')
+    const products = JSON.parse(data)
+
+    const index =products.findIndex(product => product.id === id)
+    if(index === -1){
+        return res.status(200).json({error:"producto no existente"})
+    }
+
+
+
+    const newProducts = products.filter(product => product.id != id)
+
+
+
+    await fs.promises.writeFile('products.json',JSON.stringify(newProducts,null,2))
+    res.json({message:"Producto borrado exitosamente"})
+})
+
+
 export default router

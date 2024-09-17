@@ -22,6 +22,7 @@ router.post('/',async(req,res)=>{
     const carts = JSON.parse(data)
 
 
+    
     const newCart = {
         id: crypto.randomUUID(),
         products:[]
