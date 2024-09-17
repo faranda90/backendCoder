@@ -2,6 +2,7 @@ import { Router } from "express"
 import fs from 'fs'
 
 
+
 const router = Router()
 
 router.get('/:id',async(req,res)=>{
@@ -22,7 +23,7 @@ router.post('/',async(req,res)=>{
     const carts = JSON.parse(data)
 
 
-    
+
     const newCart = {
         id: crypto.randomUUID(),
         products:[]

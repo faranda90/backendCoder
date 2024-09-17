@@ -10,7 +10,6 @@ import productsSocket from './sockets/productsSocket.js'
 
 
 
-
 const app = express()
 app.use(express.urlencoded({ extended: true}))
 app.use(express.json())
